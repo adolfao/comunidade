@@ -2,18 +2,61 @@
 
 {% block body %}
 
-  <div class = "container">
-
+  <div class="container">
+    <h1>Faça login ou crie sua conta para continuar</h1>
+    <hr>
     <!-- row e col servem para deixar login e criar conta lado a lado-->
     <div class="row">
       <div class="col">
-        <h1>login</h1>
+        <!-- sempre que for criar um formulário, coloque o método post!-->
+        <!-- o action será definido internamente e o border é uma borda-->
+         <!-- padding é distância borda pro interno e margem é distância borda pro exterior, mt é margem top-->
+        <form method="POST" action="" class="border p-4 mt-2">
+          <legend>login</legend> <!-- legend é um h1 melhor pra form -->
+          <fieldset> <!-- field set em todas as caixas de texto-->
+            <!-- separa cada grupo em um div com o form-group -->
+            <div class="form-group">
+              {{ form_login.email.label(class='form-control-label') }} <!-- título da caixa de texto pro usuário saber o que é -->
+              {{ form_login.email(class='form-control') }} <!-- caixa de texto ou botão pro usuário interagir -->
+            </div>
+            <div class="form-group">
+              {{ form_login.senha.label(class='form-control-label') }} <!-- como isso é uma variável do python, é assim que se coloca classe nele, faça isso para toda caixa de texto-->
+              {{ form_login.senha(class='form-control') }} <!-- essa classe deixou BEM mais bonito-->
+            </div>
+            <div class="form-group form-check">
+              {{ form_login.lembrar_dados.label(class='form-check-label mt-1') }}
+              {{ form_login.lembrar_dados(class='form-check-input mt-2') }}
+            </div>
+          </fieldset>
+          {{ form_login.botao_submit_login(class="btn btn-primary mt-3") }}
+        </form>
       </div>
+
       <div class="col">
-        <h1>criar conta</h1>
+        <form method="POST" action="" class="border p-4 mt-2">
+          <legend>criar conta</legend>
+          <fieldset>
+            <div class="form-group">
+              {{ form_criarconta.username.label(class='form-control-label') }}
+              {{ form_criarconta.username(class='form-control') }}
+            </div>
+            <div class="form-group">
+              {{ form_criarconta.email.label(class='form-control-label') }}
+              {{ form_criarconta.email(class='form-control') }}
+            </div>
+            <div class="form-group">
+              {{ form_criarconta.senha.label(class='form-control-label') }}
+              {{ form_criarconta.senha(class='form-control') }}
+            </div>
+            <div class="form-group">
+              {{ form_criarconta.confirmacao_senha.label(class='form-control-label') }}
+              {{ form_criarconta.confirmacao_senha(class='form-control') }}
+            </div>
+          </fieldset>
+          {{ form_criarconta.botao_submit_criarconta(class="btn btn-primary mt-3") }}
+        </form>
       </div>
     </div>
-
   </div>
 
 {% endblock %}
