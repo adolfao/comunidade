@@ -15,3 +15,7 @@ class FormLogin(FlaskForm):
   senha = PasswordField('Senha', validators=[DataRequired(), Length(6, 20)])
   lembrar_dados = BooleanField('Lembrar de mim')
   botao_submit_login = SubmitField('Fazer login')
+  
+#Isso diz ao Flask-WTF: “este botão se chamará assim quando for enviado no formulário”.  
+botao_submit_login = SubmitField('Fazer login', render_kw={'name': 'botao_submit_login'})
+botao_submit_criarconta = SubmitField('Criar conta', render_kw={'name': 'botao_submit_criarconta'})
