@@ -4,10 +4,10 @@ from dotenv import load_dotenv
 import os
 
 app = Flask(__name__) 
-load_dotenv(dotenv_path=r"C:\Users\Adolfo\Documents\comunidade\README\.env")
+load_dotenv(dotenv_path=r"C:\Users\Adolfo\Documents\comunidade\git\.env")
 
 app.config['SECRET_KEY'] =  os.getenv("SECRET_KEY")
-
+print("CHAVE CARREGADA:", app.config['SECRET_KEY'])
 @app.route('/')
 def home():
   return render_template('home.html')
@@ -20,7 +20,7 @@ def usuarios():
 def contato():
     return render_template('contato.html')
   
-@app.route('/login')
+@app.route('/login', methods=['GET', 'POST'])
 def login():
   form_login = FormLogin()
   form_criarconta = FormCriarConta()
