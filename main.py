@@ -1,12 +1,16 @@
 from flask import Flask, render_template, url_for, request, flash, redirect
 from forms import FormLogin, FormCriarConta
 from dotenv import load_dotenv
+from flask_sqlalchemy import SQLAlchemy
 import os
 
 app = Flask(__name__) 
 load_dotenv(dotenv_path=r"C:\Users\Adolfo\Documents\comunidade\git\.env")
 
 app.config['SECRET_KEY'] =  os.getenv("SECRET_KEY")
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///comunidade.db'
+
+database = SQLAlchemy(app)
 
 @app.route('/')
 def home():
