@@ -1,4 +1,4 @@
-from database import database
+from comunidade.database import database
 from datetime import datetime
 
 class Usuario(database.Model): 

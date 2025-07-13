@@ -6,11 +6,11 @@ import click
 database = SQLAlchemy()
 
 # Comando customizado para recriar o banco
-@click.command('init-db')
+@click.command('init-db') 
 @with_appcontext
 def init_db_command():
     # Apaga e recria o banco de dados.
-    from models import Usuario, Post 
+    from comunidade.models import Usuario, Post 
     database.drop_all()
     database.create_all()
     print("Banco de dados recriado com sucesso!")
