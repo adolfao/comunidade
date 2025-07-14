@@ -13,4 +13,4 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///comunidade.db'
 database.init_app(app)
 app.cli.add_command(init_db_command)
 
-from comunidade import routes
+from comunidade import routes #precisa do app pra rodar
