@@ -1,7 +1,13 @@
 from comunidade.database import database
 from datetime import datetime
+from comunidade import login_manager
+from flask_login import UserMixin
 
-class Usuario(database.Model): 
+@login_manager.user_loader
+def load_usuario(id_usuario):
+  return Usuario.query.get(int(id_usuario))
+
+class Usuario(database.Model, UserMixin): 
   id = database.Column(database.Integer, primary_key=True) #o id é uma coluna de inteiros do meu db e é a chave primária
   username = database.Column(database.String, nullable=False)                     #que seria o que é único nele e será
   senha = database.Column(database.String, nullable=False)                      #usado para identificá-lo
