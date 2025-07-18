@@ -4,6 +4,8 @@ from comunidade.forms import FormLogin, FormCriarConta, FormEditarPerfil
 from comunidade.models import Usuario
 from comunidade.database import database
 from flask_login import login_user, logout_user, current_user, login_required
+import secrets, os
+from PIL import Image
 
 @app.route('/')
 def home():
@@ -64,9 +66,32 @@ def perfil():
 def criar_post():
   return render_template('criarpost.html')
 
-@app.route('/perfil/editar')
+def salvar_imagem(imagem):
+  codigo = secrets.token_hex(8)
+  nome, extensao = os.path.splitext(imagem.filename)
+  nome_arquivo = nome + codigo + extensao
+  caminho_completo = os.path.join(app.root_path, 'static\\fotos_perfil', nome_arquivo)
+  tamanho = (200, 200)
+  imagem_reduzida = Image.open(imagem)
+  imagem_reduzida.thumbnail(tamanho)
+  imagem_reduzida.save(caminho_completo)
+  return nome_arquivo
+
+@app.route('/perfil/editar', methods=['GET', 'POST'])
 @login_required
 def editar_perfil():
   form_editarperfil = FormEditarPerfil()
+  if request.method == 'GET':
+    form_editarperfil.username.data = current_user.username
+    form_editarperfil.email.data = current_user.email   
+  if form_editarperfil.validate_on_submit():
+    current_user.email = form_editarperfil.email.data
+    current_user.username = form_editarperfil.username.data
+    if form_editarperfil.foto_perfil.data:
+      nome_imagem = salvar_imagem(form_editarperfil.foto_perfil.data)
+      current_user.foto_perfil = nome_imagem
+    database.session.commit()
+    flash(f'Perfil atualizado com sucesso!', 'alert-success')
+    return redirect(url_for('perfil'))
   foto_perfil = url_for('static', filename='fotos_perfil/{}' .format(current_user.foto_perfil))
   return render_template('editarperfil.html', foto_perfil=foto_perfil, form_editarperfil=form_editarperfil)  
