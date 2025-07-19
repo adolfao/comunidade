@@ -15,8 +15,15 @@
         >
           <div class="d-flex flex-column">
             <span class="articles">Sobre mim</span>
-            <span class="number1">0</span>
+            {% if 'Não informado' in current_user.sobremim %}   <span class="number1"
+              >0</span
+            >
+          </div> {% else %}
+            <span class="number1"
+              >{{ current_user.sobremim.count(';') + 1 }}</span
+            >
           </div>
+          {% endif %}
           <div class="d-flex flex-column">
             <span class="rating">Posts</span>
             <span class="number3">0</span>
@@ -31,6 +38,15 @@
         </div>
       </div>
     </div>
+  </div>
+</div>
+
+<div class="row justify-content-center">
+  <div class="col col-4" style="text-align: center">
+    <strong>Sobre mim</strong><br>
+    {% for sobremim in current_user.sobremim.split(';') %}
+      <button type="button" class="btn btn-success mt-2" disabled>{{ sobremim }}</button>
+    {% endfor %}
   </div>
 </div>
 

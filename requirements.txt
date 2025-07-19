@@ -5,3 +5,5 @@ python-dotenv
 email-validator
 flask-bcrypt
 Pillow
+flask_login
+flask_bcrypt

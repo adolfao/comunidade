@@ -18,7 +18,7 @@ class Usuario(database.Model, UserMixin):
   posts = database.relationship('Post', backref='autor', lazy=True)#lazy=True significa que quando eu chamar essa função
   #ela vai me retornar todas as informações sobre o autor, não preciso ficar passando cada uma de uma vez    
                                    #backref é como eu vou chamar a função, que no caso seria posts.autor
-  informacoes = database.Column(database.String, default='Não informado', nullable=False)
+  sobremim = database.Column(database.String, default='Não informado', nullable=False)
   #como o usuario n consegue entrar falando as informacoes dele, temnos que colocar um default
   #para o nullable n dar problema
             

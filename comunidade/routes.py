@@ -77,6 +77,14 @@ def salvar_imagem(imagem):
   imagem_reduzida.save(caminho_completo)
   return nome_arquivo
 
+def atualizar_sobremim(form):
+  lista_sobremim = []
+  for campo in form:
+    if 'sobremim_' in campo.name and campo.data:
+      lista_sobremim.append(campo.label.text)
+  return ';'.join(lista_sobremim)
+  
+
 @app.route('/perfil/editar', methods=['GET', 'POST'])
 @login_required
 def editar_perfil():
@@ -90,6 +98,7 @@ def editar_perfil():
     if form_editarperfil.foto_perfil.data:
       nome_imagem = salvar_imagem(form_editarperfil.foto_perfil.data)
       current_user.foto_perfil = nome_imagem
+    current_user.sobremim = atualizar_sobremim(form_editarperfil)
     database.session.commit()
     flash(f'Perfil atualizado com sucesso!', 'alert-success')
     return redirect(url_for('perfil'))

@@ -6,7 +6,7 @@ from comunidade import app
 #para rodar: python -m comunidade.testsDB (na raiz)
 
 with app.app_context():
-  Usuario.query.all()
-  print(Usuario)
-  for usuario in Usuario.query.all():
-    print(usuario.id, usuario.username, usuario.email, usuario.senha)
+    usuarios = Usuario.query.all()
+    print("Lista de usuários:")
+    for usuario in usuarios:
+        print(f"Email: {usuario.email} | Sobre mim: {usuario.sobremim}")
