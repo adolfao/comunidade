@@ -1,0 +1,31 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+.venv/
+venv/
+ENV/
+
+# IDE settings
+.vscode/
+
+# Flask instance folder
+instance/
+
+# Local development settings
+*.env
+
+# Ignorar dentro da pasta comunidade
+comunidade/__pycache__/
+comunidade/venv/
+
+# Ignorar todas as fotos de perfil exceto a default.jpg
+comunidade/static/fotos_perfil/*
+!comunidade/static/fotos_perfil/default.jpg
+
+# Distribution / packaging
+*.egg-info/
+dist/
+build/
